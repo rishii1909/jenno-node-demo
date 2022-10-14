@@ -64,7 +64,7 @@ wss.on('connection', function connection(ws) {
           console.log(`[+] Broadcasting updates to ${wss.clients.size - 1} clients.`);
 
           wss.clients.forEach(function each(client) {
-            if (client.readyState === WebSocket.OPEN) client.send(JSON.stringify(broadcast_changes));
+            if (ws !== client && client.readyState === WebSocket.OPEN) client.send(JSON.stringify(broadcast_changes));
           });
 
           break;
