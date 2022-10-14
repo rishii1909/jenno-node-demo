@@ -32,14 +32,14 @@ wss.on('connection', function connection(ws) {
             range : {}
           };
 
-          broadcast_changes = {
-            caret : CARETS[data.data.uid],
-            api_call : "add_caret"
-          }
+          // broadcast_changes = {
+          //   caret : CARETS[data.data.uid],
+          //   api_call : "add_caret"
+          // }
 
-          wss.clients.forEach(function each(client) {
-            if (client.readyState === WebSocket.OPEN) client.send(JSON.stringify(broadcast_changes));
-          });
+          // wss.clients.forEach(function each(client) {
+          //   if (client.readyState === WebSocket.OPEN) client.send(JSON.stringify(broadcast_changes));
+          // });
           ws.send(JSON.stringify({
             api_call : data.action,
             data : {
@@ -97,13 +97,13 @@ wss.on('connection', function connection(ws) {
     
     if(ws.uid){
 
-      const broadcast_changes = {
-        api_call : "delete_caret",
-        caret : CARETS[ws.uid]
-      }
-      wss.clients.forEach(function each(client) {
-        if (client.readyState === WebSocket.OPEN) client.send(JSON.stringify(broadcast_changes));
-      });
+      // const broadcast_changes = {
+      //   api_call : "delete_caret",
+      //   caret : CARETS[ws.uid]
+      // }
+      // wss.clients.forEach(function each(client) {
+      //   if (client.readyState === WebSocket.OPEN) client.send(JSON.stringify(broadcast_changes));
+      // });
       delete CARETS[ws.uid];
     }
   })
